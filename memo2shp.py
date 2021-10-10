@@ -19,6 +19,7 @@ from shapely.geometry import point
 string = input('Copie e cole o texto do seu memorial descritivo aqui:')
 EPSG = int(input('EPSG de saída: '))
 caminho_saida = input('insira o caminho de saída mais o nome do arquivo com a extensão (ex: C:\geo\shape_python\saida1.shp): ')
+caminho_saida_xlsx = input('insira o caminho de saída mais o nome do arquivo com a extensão (ex: C:\geo\shape_python\saida1.xlsx): ')
 substituicao = re.sub(r'(?<=\d)[.]','', string)
 substituicao2 = re.sub(r'(?<=\d)[,]','.', substituicao)
 x = (re.findall(r" \d{6}\ | \d{6}\.\d{2,3}", substituicao2))
@@ -29,7 +30,7 @@ df = pd.DataFrame(d)
 gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.col1, df.col2), crs= EPSG)
 
 
-df.to_excel(r'C:\geo\csv\teste5.xlsx')
+df.to_excel(caminho_saida_xlsx)
 gdf.to_file(caminho_saida)
 
 print(substituicao2)
